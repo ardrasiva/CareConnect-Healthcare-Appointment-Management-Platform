@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html
+    lang="en"
+    xmlns:th="http://www.thymeleaf.org"
+>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Hospital Management Portal</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+</head>
+
+<body>
+
+    <div th:replace="~{portal/fragments/header :: header}">
+    </div>
+
+
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-md-2 p-0">
+
+                <div
+                    th:replace="~{portal/fragments/sidebar :: sidebar}"
+                >
+                </div>
+
+            </div>
+
+
+            <div class="col-md-10 p-4">
+
+                <div class="p-4 bg-light rounded">
+
+                    <h2>Welcome</h2>
+
+                    <p>
+                        Welcome to the Hospital
+                        Management Portal.
+                    </p>
+
+                    <hr>
+
+                    <p>
+                        We will gradually build every
+                        module of the portal in the
+                        coming chapters.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
