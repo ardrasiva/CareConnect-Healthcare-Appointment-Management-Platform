@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html
+    lang="en"
+    xmlns:th="http://www.thymeleaf.org"
+>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Doctor Management</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+</head>
+
+<body>
+
+<div
+    th:replace="~{portal/fragments/header :: header}"
+>
+</div>
+
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-md-2 p-0">
+
+            <div
+                th:replace="~{portal/fragments/sidebar :: sidebar}"
+            >
+            </div>
+
+        </div>
+
+        <div class="col-md-10 p-4">
+
+            <div class="d-flex
+                        justify-content-between
+                        align-items-center
+                        mb-4">
+
+                <h2>Doctor Management</h2>
+
+                <a
+                    href="/doctors/add"
+                    class="btn btn-primary"
+                >
+                    Add Doctor
+                </a>
+
+            </div>
+
+            <table class="table table-bordered
+                          table-hover">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Name</th>
+                        <th>Specialization</th>
+                        <th>Contact</th>
+                        <th>Actions</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr
+                        th:each="doctor : ${doctors}"
+                    >
+
+                        <td
+                            th:text="${doctor.name}"
+                        >
+                        </td>
+
+                        <td
+                            th:text="${doctor.specialization}"
+                        >
+                        </td>
+
+                        <td
+                            th:text="${doctor.phoneNumber}"
+                        >
+                        </td>
+
+                        <td>
+
+                            <a
+                                th:href="@{/doctors/edit/{id}(id=${doctor.id})}"
+                                class="btn btn-sm btn-warning"
+                            >
+                                Edit
+                            </a>
+
+                            <a
+                                th:href="@{/doctors/delete/{id}(id=${doctor.id})}"
+                                class="btn btn-sm btn-danger"
+                            >
+                                Delete
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                    <tr
+                        th:if="${#lists.isEmpty(doctors)}"
+                    >
+
+                        <td
+                            colspan="4"
+                            class="text-center"
+                        >
+                            No doctors available.
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

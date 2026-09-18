@@ -8,7 +8,11 @@ public class PortalController {
 
     @GetMapping("/")
     public String home() {
-
         return "portal/home";
+    }
+    
+    @GetMapping("/login")
+    public String login() {
+        return "portal/login";
     }
 }

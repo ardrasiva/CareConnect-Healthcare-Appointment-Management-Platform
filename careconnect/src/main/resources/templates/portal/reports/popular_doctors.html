@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html
+    lang="en"
+    xmlns:th="http://www.thymeleaf.org"
+>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Most Popular Doctors</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+</head>
+
+<body>
+
+<div
+    th:replace="~{portal/fragments/header :: header}"
+>
+</div>
+
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-md-2 p-0">
+
+            <div
+                th:replace="~{portal/fragments/sidebar :: sidebar}"
+            >
+            </div>
+
+        </div>
+
+        <div class="col-md-10 p-4">
+
+            <h2 class="mb-4">
+                Most Popular Doctors
+            </h2>
+
+            <div class="card">
+
+                <div class="card-body p-0">
+
+                    <table
+                        class="table
+                               table-bordered
+                               table-hover
+                               mb-0"
+                    >
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Doctor
+                                </th>
+
+                                <th>
+                                    Total Bookings
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <tr
+                                th:each="report :
+                                ${doctors}"
+                            >
+
+                                <td
+                                    th:text="${report.doctor.name}"
+                                >
+                                </td>
+
+                                <td
+                                    th:text="${report.totalBookings}"
+                                >
+                                </td>
+
+                            </tr>
+
+                            <tr
+                                th:if="${#lists.isEmpty(doctors)}"
+                            >
+
+                                <td
+                                    colspan="2"
+                                    class="text-center"
+                                >
+                                    No data available.
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

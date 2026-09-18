@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html
+    lang="en"
+    xmlns:th="http://www.thymeleaf.org"
+>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Appointment Management</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+</head>
+
+<body>
+
+<div
+    th:replace="~{portal/fragments/header :: header}"
+>
+</div>
+
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-md-2 p-0">
+
+            <div
+                th:replace="~{portal/fragments/sidebar :: sidebar}"
+            >
+            </div>
+
+        </div>
+
+        <div class="col-md-10 p-4">
+
+            <div class="mb-4">
+
+                <h2>
+                    Appointment Management
+                </h2>
+
+            </div>
+
+
+            <form
+                method="get"
+                th:action="@{/appointments}"
+                class="row g-3 mb-4"
+            >
+
+                <div class="col-md-4">
+
+                    <label
+                        class="form-label"
+                        for="date"
+                    >
+                        Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="date"
+                        name="date"
+                        class="form-control"
+                        th:value="${selectedDate}"
+                    >
+
+                </div>
+
+                <div class="col-md-2
+                            d-flex
+                            align-items-end">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
+                        Search
+                    </button>
+
+                </div>
+
+            </form>
+
+
+            <div class="card">
+
+                <div class="card-body p-0">
+
+                    <table class="table
+                                  table-bordered
+                                  table-hover
+                                  mb-0">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Time</th>
+                                <th>Patient</th>
+                                <th>Doctor</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <tr
+                                th:each="appointment :
+                                ${appointments}"
+                            >
+
+                                <td
+                                    th:text="${appointment.appointmentTime}"
+                                >
+                                </td>
+
+                                <td
+                                    th:text="${appointment.patient.name}"
+                                >
+                                </td>
+
+                                <td
+                                    th:text="${appointment.doctor.name}"
+                                >
+                                </td>
+
+                                <td
+                                    th:text="${appointment.status}"
+                                >
+                                </td>
+
+                                <td>
+
+                                    <a
+                                        th:href="@{
+                                            /appointments/view/
+                                            {id}
+                                            (id=${appointment.id})
+                                        }"
+                                        class="btn btn-sm
+                                               btn-primary"
+                                    >
+                                        View
+                                    </a>
+
+                                </td>
+
+                            </tr>
+
+                            <tr
+                                th:if="${#lists.isEmpty(
+                                    appointments
+                                )}"
+                            >
+
+                                <td
+                                    colspan="5"
+                                    class="text-center"
+                                >
+                                    No appointments available.
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
