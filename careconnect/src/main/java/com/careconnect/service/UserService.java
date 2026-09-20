@@ -32,4 +32,9 @@ public class UserService {
                 .findById(id)
                 .orElseThrow();
     }
+    //UserService.java
+
+public long getPatientCount() {
+    return userRepository.countByRole(Role.PATIENT);
+}
 }

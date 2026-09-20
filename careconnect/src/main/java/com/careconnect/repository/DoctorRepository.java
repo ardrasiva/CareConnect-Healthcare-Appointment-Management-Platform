@@ -22,4 +22,8 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
         ORDER BY COUNT(a) DESC
     """)
     List<DoctorReport> getPopularDoctors();
+    List<Doctor> findByNameContainingIgnoreCaseOrSpecializationContainingIgnoreCase(
+        String name,
+        String specialization
+);
 }

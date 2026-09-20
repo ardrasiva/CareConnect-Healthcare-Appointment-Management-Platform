@@ -45,4 +45,13 @@ public class AppointmentService {
     return appointmentRepository
             .findByPatientId(patientId);
 }
+//AppointmentService.java
+
+public long getAppointmentCount() {
+    return appointmentRepository.count();
+}
+
+public long getTodaysAppointmentCount() {
+        return appointmentRepository.countByAppointmentDate(LocalDate.now());
+    }
 }

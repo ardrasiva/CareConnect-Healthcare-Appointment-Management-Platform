@@ -5,10 +5,13 @@ import com.careconnect.service.DoctorService;
 
 import jakarta.validation.Valid;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/doctors")
@@ -23,15 +26,39 @@ public class DoctorController {
     }
 
     @GetMapping
-    public String listDoctors(Model model) {
+public String listDoctors(
+        @RequestParam(required = false)
+        String search,
+        Model model) {
 
-        model.addAttribute(
-            "doctors",
-            doctorService.getAllDoctors()
-        );
+    List<Doctor> doctors;
 
-        return "portal/doctors/list";
+    if (search == null || search.isBlank()) {
+
+        doctors = doctorService.getAllDoctors();
+
+    } else {
+
+        doctors = doctorService.searchDoctors(search);
     }
+
+    model.addAttribute(
+        "doctors",
+        doctors
+    );
+
+    model.addAttribute(
+        "search",
+        search
+    );
+
+    model.addAttribute(
+        "activePage",
+        "doctors"
+    );
+
+    return "portal/doctors/list";
+}
     @GetMapping("/add")
 public String addDoctorForm(Model model) {
 
@@ -45,7 +72,8 @@ public String addDoctorForm(Model model) {
 @PostMapping("/add")
 public String addDoctor(
         @Valid @ModelAttribute("doctor") Doctor doctor,
-        BindingResult result) {
+        BindingResult result,
+        RedirectAttributes redirectAttributes) {
 
     if (result.hasErrors()) {
 
@@ -53,6 +81,11 @@ public String addDoctor(
     }
 
     doctorService.saveDoctor(doctor);
+
+    redirectAttributes.addFlashAttribute(
+        "message",
+        "Doctor added successfully."
+    );
 
     return "redirect:/doctors";
 }
@@ -76,7 +109,8 @@ public String editDoctorForm(
 public String editDoctor(
         @PathVariable Long id,
         @Valid @ModelAttribute("doctor") Doctor doctor,
-        BindingResult result) {
+        BindingResult result,
+        RedirectAttributes redirectAttributes) {
 
     if (result.hasErrors()) {
 
@@ -112,13 +146,24 @@ public String editDoctor(
 
     doctorService.saveDoctor(existingDoctor);
 
+    redirectAttributes.addFlashAttribute(
+        "message",
+        "Doctor updated successfully."
+    );
+
     return "redirect:/doctors";
 }
-@GetMapping("/delete/{id}")
+@PostMapping("/delete/{id}")
 public String deleteDoctor(
-        @PathVariable Long id) {
+        @PathVariable Long id,
+        RedirectAttributes redirectAttributes) {
 
     doctorService.deleteDoctor(id);
+
+    redirectAttributes.addFlashAttribute(
+        "message",
+        "Doctor deleted successfully."
+    );
 
     return "redirect:/doctors";
 }

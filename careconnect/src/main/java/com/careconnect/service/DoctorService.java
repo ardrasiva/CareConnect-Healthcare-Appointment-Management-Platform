@@ -44,4 +44,17 @@ public class DoctorService {
     return doctorRepository
             .getPopularDoctors();
 }
+public List<Doctor> searchDoctors(String search) {
+
+    return doctorRepository
+        .findByNameContainingIgnoreCaseOrSpecializationContainingIgnoreCase(
+            search,
+            search
+        );
+}
+//DoctorService.java
+
+public long getDoctorCount() {
+    return doctorRepository.count();
+}
 }

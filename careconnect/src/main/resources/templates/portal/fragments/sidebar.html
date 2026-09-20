@@ -4,17 +4,21 @@
 >
 
     <a
-        href="/"
-        class="list-group-item
-               list-group-item-action active"
-    >
-        Dashboard
-    </a>
+    th:href="@{/}"
+    class="list-group-item
+           list-group-item-action"
+    th:classappend="${activePage == 'dashboard'}
+        ? ' active'"
+>
+    Dashboard
+</a>
 
     <a
     th:href="@{/doctors}"
     class="list-group-item
            list-group-item-action"
+    th:classappend="${activePage == 'doctors'}
+        ? ' active'"
 >
     Doctors
 </a>
@@ -23,6 +27,8 @@
     th:href="@{/appointments}"
     class="list-group-item
            list-group-item-action"
+    th:classappend="${activePage == 'appointments'}
+        ? ' active'"
 >
     Appointments
 </a>
@@ -31,6 +37,8 @@
     th:href="@{/users}"
     class="list-group-item
            list-group-item-action"
+    th:classappend="${activePage == 'users'}
+        ? ' active'"
 >
     Users
 </a>
@@ -39,10 +47,11 @@
     th:href="@{/reports}"
     class="list-group-item
            list-group-item-action"
+    th:classappend="${activePage == 'reports'}
+        ? ' active'"
 >
     Reports
 </a>
-
     <form
     th:action="@{/logout}"
     method="post"
