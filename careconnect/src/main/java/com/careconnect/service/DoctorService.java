@@ -57,4 +57,15 @@ public List<Doctor> searchDoctors(String search) {
 public long getDoctorCount() {
     return doctorRepository.count();
 }
+public List<Doctor> getActiveDoctors() {
+
+    return doctorRepository
+            .findByIsActiveTrue();
+}
+public Optional<Doctor> getActiveDoctorById(
+        Long id) {
+
+    return doctorRepository
+            .findByIdAndIsActiveTrue(id);
+}
 }
