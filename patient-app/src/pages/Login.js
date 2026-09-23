@@ -22,7 +22,7 @@ function Login() {
     const [error, setError] =
         useState("");
 
-
+const [showPassword, setShowPassword] = useState(false);
     const dispatch =
         useDispatch();
 
@@ -131,31 +131,39 @@ function Login() {
                     </div>
 
 
-                    <div className="form-group">
+                    <div className="input-group">
 
-                        <label>
-                            Password
-                        </label>
+    <input
+        type={showPassword ? "text" : "password"}
+        value={password}
+        onChange={(e) =>
+            setPassword(e.target.value)
+        }
+        className="form-control"
+        placeholder="Password"
+    />
 
-                        <input
-                            type="password"
-                            className="form-control"
-                            value={password}
-                            onChange={
-                                event =>
-                                    setPassword(
-                                        event.target.value
-                                    )
-                            }
-                            required
-                        />
+    <button
+        type="button"
+        className="btn btn-outline-secondary"
+        onClick={() =>
+            setShowPassword(!showPassword)
+        }
+    >
+        <i
+            className={
+                showPassword
+                    ? "bi bi-eye-slash"
+                    : "bi bi-eye"
+            }
+        ></i>
+    </button>
 
-                    </div>
-
+</div>
 
                     <button
                         type="submit"
-                        className="btn btn-primary"
+                        className="btn btn-primary mt-3"
                     >
                         Login
                     </button>

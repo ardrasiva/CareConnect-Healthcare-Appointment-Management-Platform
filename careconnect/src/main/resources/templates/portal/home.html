@@ -132,18 +132,66 @@
 <div class="card">
 
     <div class="card-header">
-
         Today's Appointments
-
     </div>
 
     <div class="card-body">
 
-        <div class="alert alert-light mb-0">
-
+        <div
+            th:if="${#lists.isEmpty(todays_appointments)}"
+            class="alert alert-light"
+        >
             No appointments available.
-
         </div>
+
+
+        <table
+            th:if="${!#lists.isEmpty(todays_appointments)}"
+            class="table table-bordered table-hover"
+        >
+
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Patient</th>
+                    <th>Doctor</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+
+            <tbody>
+
+                <tr
+                    th:each="appointment :
+                    ${todays_appointments}"
+                >
+
+                    <td
+                        th:text="${appointment.appointmentTime}"
+                    >
+                    </td>
+
+                    <td
+                        th:text="${appointment.patient.firstName + ' ' + appointment.patient.lastName}"
+                    >
+                    </td>
+
+                    <td
+                        th:text="${appointment.doctor.name}"
+                    >
+                    </td>
+
+                    <td
+                        th:text="${appointment.status}"
+                    >
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
 
     </div>
 

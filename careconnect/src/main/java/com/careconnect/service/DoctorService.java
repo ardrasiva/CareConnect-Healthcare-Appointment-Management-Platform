@@ -2,6 +2,7 @@ package com.careconnect.service;
 
 import com.careconnect.dto.DoctorReport;
 import com.careconnect.entity.Doctor;
+import com.careconnect.repository.AppointmentRepository;
 import com.careconnect.repository.DoctorRepository;
 
 import org.springframework.stereotype.Service;
@@ -13,12 +14,16 @@ import java.util.Optional;
 public class DoctorService {
 
     private final DoctorRepository doctorRepository;
+    private final AppointmentRepository appointmentRepository;
 
     public DoctorService(
-            DoctorRepository doctorRepository) {
+        DoctorRepository doctorRepository,
+        AppointmentRepository appointmentRepository) {
 
-        this.doctorRepository = doctorRepository;
-    }
+    this.doctorRepository = doctorRepository;
+    this.appointmentRepository =
+            appointmentRepository;
+}
 
     public List<Doctor> getAllDoctors() {
 
@@ -37,8 +42,31 @@ public class DoctorService {
 
     public void deleteDoctor(Long id) {
 
-        doctorRepository.deleteById(id);
+    Doctor doctor =
+            doctorRepository
+                    .findById(id)
+                    .orElseThrow(() ->
+                        new IllegalArgumentException(
+                            "Doctor not found."
+                        )
+                    );
+
+
+    boolean hasAppointments =
+            appointmentRepository
+                    .existsByDoctor(doctor);
+
+
+    if (hasAppointments) {
+
+        throw new IllegalArgumentException(
+            "Cannot delete this doctor because they have appointments."
+        );
     }
+
+
+    doctorRepository.delete(doctor);
+}
     public List<DoctorReport> getPopularDoctors() {
 
     return doctorRepository

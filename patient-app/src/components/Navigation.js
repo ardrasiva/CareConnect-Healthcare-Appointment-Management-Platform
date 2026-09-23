@@ -121,7 +121,12 @@ function Navigation() {
                             >
                                 Appointments
                             </Link>
-
+                        <Link
+    to="/appointments/book"
+    className="nav-link"
+>
+    Book Appointment
+</Link>
 
                             <Link
                                 to="/change-password"

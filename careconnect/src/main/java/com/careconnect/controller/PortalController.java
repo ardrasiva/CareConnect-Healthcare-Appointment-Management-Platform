@@ -1,5 +1,7 @@
 package com.careconnect.controller;
 
+import java.time.LocalDate;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +31,12 @@ public class PortalController {
         model.addAttribute("doctor_count", doctorService.getDoctorCount());
         model.addAttribute("patient_count", userService.getPatientCount());
         model.addAttribute("todays_appointment_count", appointmentService.getTodaysAppointmentCount());
-        model.addAttribute("todays_appointment_count", appointmentService.getTodaysAppointmentCount());
+        model.addAttribute(
+    "todays_appointments",
+    appointmentService.getAppointmentsByDate(
+        LocalDate.now()
+    )
+);
         model.addAttribute("appointment_count", appointmentService.getAppointmentCount());
         model.addAttribute("activePage", "dashboard");
 

@@ -4,7 +4,7 @@ import com.careconnect.entity.Doctor;
 import com.careconnect.service.DoctorService;
 
 import jakarta.validation.Valid;
-
+import org.springframework.dao.DataIntegrityViolationException;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -73,21 +73,33 @@ public String addDoctorForm(Model model) {
 public String addDoctor(
         @Valid @ModelAttribute("doctor") Doctor doctor,
         BindingResult result,
-        RedirectAttributes redirectAttributes) {
+        Model model) {
 
     if (result.hasErrors()) {
 
         return "portal/doctors/form";
     }
 
-    doctorService.saveDoctor(doctor);
+    try {
 
-    redirectAttributes.addFlashAttribute(
-        "message",
-        "Doctor added successfully."
-    );
+        doctorService.saveDoctor(doctor);
 
-    return "redirect:/doctors";
+        return "redirect:/doctors";
+
+    } catch (DataIntegrityViolationException e) {
+
+        model.addAttribute(
+            "duplicateError",
+            "Doctor already exists."
+        );
+
+        model.addAttribute(
+            "activePage",
+            "doctors"
+        );
+
+        return "portal/doctors/form";
+    }
 }
 @GetMapping("/edit/{id}")
 public String editDoctorForm(
@@ -158,12 +170,22 @@ public String deleteDoctor(
         @PathVariable Long id,
         RedirectAttributes redirectAttributes) {
 
-    doctorService.deleteDoctor(id);
+    try {
 
-    redirectAttributes.addFlashAttribute(
-        "message",
-        "Doctor deleted successfully."
-    );
+        doctorService.deleteDoctor(id);
+
+        redirectAttributes.addFlashAttribute(
+            "message",
+            "Doctor deleted successfully."
+        );
+
+    } catch (IllegalArgumentException e) {
+
+        redirectAttributes.addFlashAttribute(
+            "error",
+            e.getMessage()
+        );
+    }
 
     return "redirect:/doctors";
 }

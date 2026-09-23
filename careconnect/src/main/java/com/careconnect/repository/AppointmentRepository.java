@@ -33,5 +33,6 @@ long countByAppointmentDate(LocalDate date);
             LocalTime appointmentTime,
             AppointmentStatus status
     );
+    boolean existsByDoctor(Doctor doctor);
 
 }

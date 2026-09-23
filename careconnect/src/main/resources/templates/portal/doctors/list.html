@@ -78,6 +78,7 @@
         </button>
 
     </div>
+    
 
 </form>
                 <a
@@ -91,8 +92,16 @@
             <div
     th:if="${message}"
     class="alert alert-success"
-    th:text="${message}"
 >
+    <span th:text="${message}"></span>
+</div>
+
+
+<div
+    th:if="${error}"
+    class="alert alert-danger"
+>
+    <span th:text="${error}"></span>
 </div>
             <table class="table table-bordered
                           table-hover">

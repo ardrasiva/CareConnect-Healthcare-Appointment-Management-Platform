@@ -59,7 +59,10 @@ public class AppointmentController {
                 selectedDate
             );
         }
-
+model.addAttribute(
+    "activePage",
+    "appointments"
+);
         return "portal/appointments/list";
     }
     @GetMapping("/view/{id}")
@@ -71,6 +74,10 @@ public String viewAppointment(
         "appointment",
         appointmentService.getAppointmentById(id)
     );
+    model.addAttribute(
+    "activePage",
+    "appointments"
+);
 
     return "portal/appointments/view";
 }

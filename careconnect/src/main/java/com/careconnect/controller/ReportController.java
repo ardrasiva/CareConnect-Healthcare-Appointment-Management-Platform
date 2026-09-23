@@ -26,7 +26,10 @@ public class ReportController {
             "doctors",
             doctorService.getPopularDoctors()
         );
-
+         model.addAttribute(
+        "activePage",
+        "reports"
+    );
         return "portal/reports/popular_doctors";
     }
 }

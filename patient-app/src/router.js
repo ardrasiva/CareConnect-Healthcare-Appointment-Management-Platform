@@ -4,9 +4,12 @@ import {
 import CheckAuth from "./auth/CheckAuth";
 import App from "./App";
 import Appointments from "./pages/Appointments";
+import ChangePassword
+    from "./pages/ChangePassword";
 import Home
     from "./pages/Home";
-
+import BookAppointment
+    from "./pages/BookAppointment";
 import DoctorList
     from "./pages/DoctorList";
 
@@ -60,7 +63,25 @@ const router =
                 <Appointments />
             </CheckAuth>
         )
-    }
+    },
+    {
+    path: "appointments/book",
+
+    element: (
+        <CheckAuth>
+            <BookAppointment />
+        </CheckAuth>
+    )
+},
+{
+    path: "change-password",
+
+    element: (
+        <CheckAuth>
+            <ChangePassword />
+        </CheckAuth>
+    )
+}
 
 ]
         }
