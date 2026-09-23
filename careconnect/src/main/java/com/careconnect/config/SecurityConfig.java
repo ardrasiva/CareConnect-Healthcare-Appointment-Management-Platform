@@ -37,8 +37,10 @@ public class SecurityConfig {
 
         http
             // Disable CSRF for REST APIs
+            .cors(cors -> {})
             .csrf(csrf -> csrf.disable())
-
+            
+    
             .authorizeHttpRequests(auth -> auth
 
                 .dispatcherTypeMatchers(
