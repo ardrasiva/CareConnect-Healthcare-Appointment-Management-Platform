@@ -1,5 +1,5 @@
 import {
-    Link,
+    NavLink,
     useNavigate
 } from "react-router-dom";
 
@@ -9,6 +9,10 @@ import {
 } from "react-redux";
 
 import api from "../api/axios";
+
+import "./Navigation.css";
+
+
 function Navigation() {
 
     const isLoggedIn =
@@ -28,122 +32,178 @@ function Navigation() {
 
     const handleLogout = async () => {
 
-    try {
+        try {
 
-        await api.post("/logout");
+            await api.post("/logout");
 
-    } catch (error) {
+        } catch (error) {
 
-        console.error(
-            "Logout request failed.",
-            error
+            console.error(
+                "Logout request failed.",
+                error
+            );
+
+        }
+
+
+        localStorage.removeItem(
+            "token"
         );
 
-    }
+
+        dispatch({
+
+            type: "LOGOUT"
+
+        });
 
 
-    localStorage.removeItem(
-        "token"
-    );
+        navigate("/login");
 
-
-    dispatch({
-
-        type: "LOGOUT"
-
-    });
-
-
-    navigate("/login");
-
-};
+    };
 
 
     return (
 
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="patient-navbar">
 
-            <div className="container">
+            <div className="patient-navbar-container">
 
-                <Link
+
+                {/* LOGO */}
+
+                <NavLink
                     to="/"
-                    className="navbar-brand"
+                    className="patient-logo"
                 >
-                    CareConnect
-                </Link>
 
 
-                <div className="navbar-nav">
+                    <span>
+                        Care<span>Connect</span>
+                    </span>
 
-                    <Link
+                </NavLink>
+
+
+                {/* NAVIGATION */}
+
+                <div className="patient-nav-links">
+
+
+                    {/* HOME */}
+
+                    <NavLink
                         to="/"
-                        className="nav-link"
+                        end
+                        className={({ isActive }) =>
+                            isActive
+                                ? "patient-nav-link active"
+                                : "patient-nav-link"
+                        }
                     >
                         Home
-                    </Link>
+                    </NavLink>
 
 
-                    <Link
+                    {/* DOCTORS */}
+
+                    <NavLink
                         to="/doctors"
-                        className="nav-link"
+                        className={({ isActive }) =>
+                            isActive
+                                ? "patient-nav-link active"
+                                : "patient-nav-link"
+                        }
                     >
                         Doctors
-                    </Link>
+                    </NavLink>
 
+
+                    {/* LOGGED OUT */}
 
                     {!isLoggedIn && (
 
                         <>
-                            <Link
+
+                            <NavLink
                                 to="/login"
-                                className="nav-link"
+                                className={({ isActive }) =>
+                                    isActive
+                                        ? "patient-nav-link active"
+                                        : "patient-nav-link"
+                                }
                             >
                                 Login
-                            </Link>
+                            </NavLink>
 
-                            <Link
+
+                            <NavLink
                                 to="/register"
-                                className="nav-link"
+                                className={({ isActive }) =>
+                                    isActive
+                                        ? "patient-register active"
+                                        : "patient-register"
+                                }
                             >
                                 Register
-                            </Link>
+                            </NavLink>
+
                         </>
 
                     )}
 
 
+                    {/* LOGGED IN */}
+
                     {isLoggedIn && (
 
                         <>
-                            <Link
+
+                            <NavLink
                                 to="/appointments"
-                                className="nav-link"
+                                className={({ isActive }) =>
+                                    isActive
+                                        ? "patient-nav-link active"
+                                        : "patient-nav-link"
+                                }
                             >
                                 Appointments
-                            </Link>
-                        <Link
-    to="/appointments/book"
-    className="nav-link"
->
-    Book Appointment
-</Link>
+                            </NavLink>
 
-                            <Link
+
+                            <NavLink
+                                to="/appointments/book"
+                                className={({ isActive }) =>
+                                    isActive
+                                        ? "patient-nav-link active"
+                                        : "patient-nav-link"
+                                }
+                            >
+                                Book Appointment
+                            </NavLink>
+
+
+                            <NavLink
                                 to="/change-password"
-                                className="nav-link"
+                                className={({ isActive }) =>
+                                    isActive
+                                        ? "patient-nav-link active"
+                                        : "patient-nav-link"
+                                }
                             >
                                 Change Password
-                            </Link>
+                            </NavLink>
 
 
                             <button
-                                className="btn btn-link nav-link"
+                                className="patient-logout"
                                 onClick={
                                     handleLogout
                                 }
                             >
                                 Logout
                             </button>
+
                         </>
 
                     )}
@@ -153,6 +213,7 @@ function Navigation() {
             </div>
 
         </nav>
+
     );
 }
 

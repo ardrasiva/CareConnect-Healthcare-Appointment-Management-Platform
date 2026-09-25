@@ -2,8 +2,6 @@ import {
     Outlet
 } from "react-router-dom";
 
-import Header
-    from "./components/Header";
 
 import Navigation
     from "./components/Navigation";
@@ -25,7 +23,7 @@ function App() {
 
             <div className="d-flex flex-column min-vh-100">
 
-                <Header />
+                
 
                 <Navigation />
 

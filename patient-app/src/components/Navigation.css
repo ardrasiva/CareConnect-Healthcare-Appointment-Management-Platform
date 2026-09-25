@@ -1,0 +1,315 @@
+/* =========================================
+   CARECONNECT PATIENT NAVBAR
+   ========================================= */
+
+.patient-navbar {
+    width: 100%;
+
+    height: 76px;
+
+    background: hsl(0, 0%, 100%);
+
+    border-bottom: 1px solid #e7edf3;
+
+    position: relative;
+
+    z-index: 100;
+}
+
+
+/* =========================================
+   NAVBAR CONTAINER
+   ========================================= */
+
+.patient-navbar-container {
+
+    max-width: 1200px;
+
+    height: 100%;
+
+    margin: 0 auto;
+
+    padding: 0 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+/* =========================================
+   CARECONNECT LOGO
+   ========================================= */
+
+.patient-logo {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: #123b78;
+
+    font-size: 24px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+
+.patient-logo:hover {
+
+    color: #123b78;
+
+    text-decoration: none;
+}
+
+
+.patient-logo > span:last-child span {
+
+    color: #1597d4;
+}
+
+
+/* Logo + icon */
+
+.patient-logo-icon {
+
+    width: 35px;
+
+    height: 35px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #1597d4;
+
+    color: white;
+
+    border-radius: 10px;
+
+    font-size: 25px;
+
+    font-weight: 400;
+}
+
+
+/* =========================================
+   NAVIGATION LINKS
+   ========================================= */
+
+.patient-nav-links {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 28px;
+}
+
+
+.patient-nav-link {
+
+    position: relative;
+
+    padding: 28px 0 25px;
+
+    color: #64748b;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    text-decoration: none;
+
+    transition:
+        color 0.25s ease;
+}
+
+
+.patient-nav-link:hover {
+
+    color: #1597d4;
+
+    text-decoration: none;
+}
+
+
+/* =========================================
+   ACTIVE PAGE
+   ========================================= */
+
+.patient-nav-link.active {
+
+    color: #1597d4;
+
+    font-weight: 600;
+}
+
+
+.patient-nav-link.active::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    right: 0;
+
+    bottom: 15px;
+
+    height: 2px;
+
+    background: #1597d4;
+
+    border-radius: 5px;
+}
+
+
+/* =========================================
+   REGISTER BUTTON
+   ========================================= */
+
+.patient-register {
+
+    padding: 9px 18px;
+
+    background: #1597d4;
+
+    color: white;
+
+    border-radius: 9px;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    text-decoration: none;
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+.patient-register:hover {
+
+    background: #0f83bb;
+
+    color: white;
+
+    text-decoration: none;
+
+    transform: translateY(-1px);
+}
+
+
+.patient-register.active {
+
+    background: #0f83bb;
+
+    color: white;
+
+    box-shadow:
+        0 5px 15px
+        rgba(21, 151, 212, 0.25);
+}
+
+
+/* =========================================
+   LOGOUT
+   ========================================= */
+
+.patient-logout {
+
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    color: #64748b;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition: color 0.25s ease;
+}
+
+
+.patient-logout:hover {
+
+    color: #dc2626;
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 950px) {
+
+    .patient-navbar-container {
+
+        padding: 0 20px;
+    }
+
+    .patient-nav-links {
+
+        gap: 18px;
+    }
+
+}
+
+
+@media (max-width: 750px) {
+
+    .patient-navbar {
+
+        height: auto;
+    }
+
+
+    .patient-navbar-container {
+
+        padding: 18px 20px;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+
+    .patient-nav-links {
+
+        flex-wrap: wrap;
+
+        justify-content: center;
+
+        gap: 16px;
+    }
+
+
+    .patient-nav-link {
+
+        padding: 5px 0;
+    }
+
+
+    .patient-nav-link.active::after {
+
+        bottom: 0;
+    }
+
+}

@@ -10,6 +10,8 @@ import {
 
 import api from "../api/axios";
 
+import "./Login.css";
+
 
 function Login() {
 
@@ -22,7 +24,9 @@ function Login() {
     const [error, setError] =
         useState("");
 
-const [showPassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] =
+        useState(false);
+
     const dispatch =
         useDispatch();
 
@@ -85,90 +89,204 @@ const [showPassword, setShowPassword] = useState(false);
 
     return (
 
-        <div className="row justify-content-center">
+        <div className="login-page">
 
-            <div className="col-md-5">
-
-                <h2 className="mb-4">
-                    Login
-                </h2>
+            <div className="login-card">
 
 
-                {error && (
+                {/* LEFT SIDE */}
 
-                    <div className="alert alert-danger">
+                <div className="login-image">
 
-                        {error}
+                    <div className="login-image-overlay">
 
-                    </div>
+                        <div className="login-image-content">
 
-                )}
+                            
 
+                            <h2>
+                                CareConnect
+                            </h2>
 
-                <form
-                    onSubmit={handleSubmit}
-                >
+                            <p>
+                                Making healthcare simpler,
+                                one appointment at a time.
+                            </p>
 
-                    <div className="form-group">
-
-                        <label>
-                            Email
-                        </label>
-
-                        <input
-                            type="email"
-                            className="form-control"
-                            value={email}
-                            onChange={
-                                event =>
-                                    setEmail(
-                                        event.target.value
-                                    )
-                            }
-                            required
-                        />
+                        </div>
 
                     </div>
 
+                </div>
 
-                    <div className="input-group">
 
-    <input
-        type={showPassword ? "text" : "password"}
-        value={password}
-        onChange={(e) =>
-            setPassword(e.target.value)
-        }
-        className="form-control"
-        placeholder="Password"
-    />
+                {/* RIGHT SIDE */}
 
-    <button
-        type="button"
-        className="btn btn-outline-secondary"
-        onClick={() =>
-            setShowPassword(!showPassword)
-        }
-    >
-        <i
-            className={
-                showPassword
-                    ? "bi bi-eye-slash"
-                    : "bi bi-eye"
-            }
-        ></i>
-    </button>
+                <div className="login-form-section">
 
-</div>
+                    <div className="login-form-container">
 
-                    <button
-                        type="submit"
-                        className="btn btn-primary mt-3"
-                    >
-                        Login
-                    </button>
 
-                </form>
+                        <div className="login-top-icon">
+
+                            <i className="bi bi-heart-pulse"></i>
+
+                        </div>
+
+
+                        <p className="login-welcome">
+                            WELCOME BACK
+                        </p>
+
+
+                        <h1>
+                            Login
+                        </h1>
+
+
+                        <p className="login-description">
+                            Sign in to continue to CareConnect
+                        </p>
+
+
+                        {/* ERROR */}
+
+                        {error && (
+
+                            <div className="login-error">
+
+                                <i className="bi bi-exclamation-circle"></i>
+
+                                <span>
+                                    {error}
+                                </span>
+
+                            </div>
+
+                        )}
+
+
+                        <form
+                            onSubmit={handleSubmit}
+                        >
+
+
+                            {/* EMAIL */}
+
+                            <div className="login-field">
+
+                                <label>
+                                    Email
+                                </label>
+
+                                <div className="login-input">
+
+                                    <i className="bi bi-envelope"></i>
+
+                                    <input
+                                        type="email"
+                                        value={email}
+                                        onChange={
+                                            event =>
+                                                setEmail(
+                                                    event.target.value
+                                                )
+                                        }
+                                        placeholder="Enter your email"
+                                        required
+                                    />
+
+                                </div>
+
+                            </div>
+
+
+                            {/* PASSWORD */}
+
+                            <div className="login-field">
+
+                                <label>
+                                    Password
+                                </label>
+
+                                <div className="login-input">
+
+                                    <i className="bi bi-lock"></i>
+
+                                    <input
+                                        type={
+                                            showPassword
+                                                ? "text"
+                                                : "password"
+                                        }
+                                        value={password}
+                                        onChange={
+                                            event =>
+                                                setPassword(
+                                                    event.target.value
+                                                )
+                                        }
+                                        placeholder="Enter your password"
+                                        required
+                                    />
+
+
+                                    <button
+                                        type="button"
+                                        className="password-eye"
+                                        onClick={() =>
+                                            setShowPassword(
+                                                !showPassword
+                                            )
+                                        }
+                                    >
+
+                                        <i
+                                            className={
+                                                showPassword
+                                                    ? "bi bi-eye-slash"
+                                                    : "bi bi-eye"
+                                            }
+                                        ></i>
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+
+                            {/* LOGIN BUTTON */}
+
+                            <button
+                                type="submit"
+                                className="login-button"
+                            >
+
+                                Login
+
+                                <i className="bi bi-arrow-right"></i>
+
+                            </button>
+
+
+                        </form>
+
+
+                        <p className="login-register-text">
+
+                            Don't have an account?
+
+                            <a href="/register">
+                                Create an account
+                            </a>
+
+                        </p>
+
+
+                    </div>
+
+                </div>
 
             </div>
 
