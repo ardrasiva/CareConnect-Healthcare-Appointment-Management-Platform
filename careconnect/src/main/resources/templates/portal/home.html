@@ -46,11 +46,27 @@
 
                 <div class="mb-4">
 
-    <h2>Dashboard</h2>
+    <div class="d-flex justify-content-between align-items-center mb-2">
 
-    <p class="text-muted">
-        Overview of the hospital booking system.
-    </p>
+    <div>
+
+        <h2>Dashboard</h2>
+
+        <p class="text-muted mb-0">
+            Overview of the hospital booking system.
+        </p>
+
+    </div>
+
+
+    <a
+        th:href="@{/reports/pdf/overview}"
+        class="btn btn-primary"
+    >
+        Export Overview PDF
+    </a>
+
+</div>
     <div class="row g-3 mb-4">
 
     <div class="col-md-3">
